@@ -1,0 +1,17 @@
+#!/bin/bash
+
+progname=$(basename $0)
+THISDIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)"
+source $THISDIR/../libexec/kvm-cluster-up/common.sh
+
+for i in "$@"; do
+    name=${KUP_PREFIX?:oops}-vm-${i}
+    for s in $(virsh snapshot-list $name --name | awk '{ print $1 }'); do
+	virsh snapshot-delete --domain $name $s || true
+    done
+    virsh destroy $name || true
+    virsh undefine $name || true
+    virsh pool-refresh $KUP_POOL
+    virsh vol-delete --pool $KUP_POOL ${name}.qcow2
+    virsh vol-delete --pool $KUP_POOL "${name}-ds.iso" || true
+done

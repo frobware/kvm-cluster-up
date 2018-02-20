@@ -1,0 +1,10 @@
+#!/bin/bash
+
+progname=$(basename $0)
+THISDIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)"
+source $THISDIR/../libexec/kvm-cluster-up/common.sh
+
+for i in "$@"; do
+    name=${KUP_PREFIX:?oops}-vm-${i}
+    virsh reboot $name
+done

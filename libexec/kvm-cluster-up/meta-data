@@ -1,0 +1,6 @@
+instance-id: @@IID-UUID@@
+hostname: @@HOSTNAME@@
+host: @@HOSTNAME@@
+local-hostname: @@HOSTNAME@@
+fqdn: @@HOSTNAME@@.@@DOMAINNAME@@
+manage_etc_hosts: true

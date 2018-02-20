@@ -1,0 +1,26 @@
+#cloud-config
+
+growpart:
+  mode: auto
+  devices: ['/']
+
+chpasswd:
+  list: |
+    @@KUP_CLOUD_USERNAME@@:password
+  expire: false
+
+packages:
+  - NetworkManager
+
+ssh_pwauth: True
+disable_root: false
+
+package_reboot_if_required: false
+package_upgrade: false
+
+runcmd:
+  - touch /etc/cloud/cloud-init.disabled
+
+power_state:
+  mode: poweroff
+  condition: True

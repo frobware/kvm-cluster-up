@@ -1,0 +1,12 @@
+#!/bin/bash
+
+progname=$(basename $0)
+THISDIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)"
+source $THISDIR/../libexec/kvm-cluster-up/common.sh
+
+: ${SNAPSHOT:?"you-did-not-set-a-SNAPSHOT"}
+
+for i in "$@"; do
+    name=${KUP_PREFIX:?oops}-vm-${i}
+    virsh snapshot-revert $name ${SNAPSHOT}
+done

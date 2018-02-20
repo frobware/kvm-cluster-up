@@ -1,0 +1,35 @@
+#!/bin/bash
+
+progname=$(basename $0)
+THISDIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)"
+source $THISDIR/../libexec/kvm-cluster-up/common.sh
+
+set -eu
+
+for i in "$@"; do
+    name=${KUP_PREFIX:?oops}-vm-${i}
+    config_drive=$(mktemp -d)/"${name}-ds.iso"
+    $THISDIR/../libexec/kvm-cluster-up/create-config-drive \
+	--domainname=$KUP_DOMAINNAME \
+	--hostname=$name \
+	--ssh-key=$HOME/.ssh/id_rsa.pub	\
+	--user-data=$THISDIR/../libexec/kvm-cluster-up/user-data \
+	$config_drive
+    $DRYRUN virsh pool-refresh --pool $KUP_POOL
+    $DRYRUN virsh vol-create-as --pool $KUP_POOL $(basename $config_drive) $(stat -Lc%s $config_drive) --format raw
+    $DRYRUN virsh vol-upload --pool $KUP_POOL $(basename $config_drive) $config_drive
+    $DRYRUN virsh vol-clone --pool $KUP_POOL ${KUP_CLOUD_IMG} ${name}.qcow2
+    $DRYRUN virsh vol-resize --pool $KUP_POOL ${name}.qcow2 +${KUP_DISK_RESIZE}G
+    $DRYRUN virsh pool-refresh $KUP_POOL
+    $DRYRUN virt-install -r $KUP_RAM \
+	    --os-variant=${KUP_OS_VARIANT} \
+	    -n $name \
+	    --vcpus=$KUP_NCPUS \
+	    --noautoconsole \
+	    --memballoon virtio \
+	    --boot hd \
+	    --disk vol=$KUP_POOL/${name}.qcow2,format=qcow2,bus=virtio,cache=writeback \
+	    --disk vol=$KUP_POOL/$(basename $config_drive),bus=virtio \
+	    --network network=${KUP_NETWORK},model=virtio
+    $DRYRUN rm -rf $config_drive
+done

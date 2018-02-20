@@ -1,0 +1,28 @@
+#!/bin/bash
+
+progname=$(basename $0)
+THISDIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)"
+source $THISDIR/../libexec/kvm-cluster-up/common.sh
+
+: ${STATE:="shut off"}
+
+duration=${TIMEOUT:=30}		# in seconds
+name=${KUP_PREFIX:?oops}-vm-$1
+
+while [ $duration -gt 0 ]; do
+    node_state=$(virsh domstate $name)
+    if [ $? -ne 0 ]; then
+	exit 1
+    fi
+    if [ "$node_state" = "$STATE" ]; then
+	break
+    fi
+    echo "$name: $node_state"
+    sleep 1
+    duration=$(($duration - 1))
+done
+
+if [ "$node_state" != "$STATE" ]; then
+    echo "$name did not reach '$STATE'; waited for ${TIMEOUT}s" 2>&1
+    exit 1
+fi
