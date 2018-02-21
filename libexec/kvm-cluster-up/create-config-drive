@@ -107,9 +107,6 @@ if [ "$ssh_key_data" ]; then
 	EOF
 fi
 
-cat $config_dir/meta-data
-cat $config_dir/user-data
-
 echo "generating configuration image at $config_image"
 if ! mkisofs -o "$config_image" -V cidata -r -J --quiet $config_dir; then
 	echo "ERROR: failed to create $config_image" >&2
