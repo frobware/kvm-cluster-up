@@ -318,7 +318,7 @@ identified as *1*.
 	$ SNAPSHOT=baseinstall kup-snapshot-select 1
 	$ kup-domain-start 1
 
-## Replacing a snaphot
+## Replacing a snapshot
 
 	$ kup-domain-stop 1
 	$ SNAPSHOT=baseinstall kup-snapshot-select 1
@@ -327,3 +327,7 @@ identified as *1*.
 	$ kup-domain-stop 1
 	$ SNAPSHOT=pkg-refresh kup-snapshot-delete 1
 	$ SNAPSHOT=pkg-refresh kup-snapshot-create 1
+
+# Installation
+
+Please read the [INSTALL](INSTALL.md) companion.
