@@ -31,7 +31,8 @@ The cloud images you intend to use need to be uploaded into the
 
 ## Network Configuration
 
-The simplest configuration is to bridge locally on the machine:
+The simplest configuration is to bridge locally on the virtualisation
+host:
 
 	$ cat network.xml
 	<network>

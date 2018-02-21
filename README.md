@@ -310,7 +310,7 @@ revert:
 	------------------------------------------------------------
 
 Here you can see I've only created snapshots for the machine
-identified as `*1*`.
+identified as `1`.
 
 ## Reverting/Selecting a snapshot by name
 
@@ -318,19 +318,16 @@ identified as `*1*`.
 	$ SNAPSHOT=baseinstall kup-snapshot-select 1
 	$ kup-domain-start 1
 
-## Replacing a snapshot
-
-If a snapshot name already exists the existing snapshot must be deleted first:
+## Updating a snapshot
 
 	$ kup-domain-stop 1
 	$ SNAPSHOT=baseinstall kup-snapshot-select 1
-
+	# Start from a known-good place.
 	$ kup-domain-start 1
-	# login, do some stuff
-
+	
+	# login, do some corrections in "baseinstall", then snapshot again.
 	$ kup-domain-stop 1
-	$ SNAPSHOT=pkg-refresh kup-snapshot-delete 1
-	$ SNAPSHOT=pkg-refresh kup-snapshot-create 1
+	$ SNAPSHOT=pkg-refresh kup-snapshot-replace 1
 
 # Installation
 
