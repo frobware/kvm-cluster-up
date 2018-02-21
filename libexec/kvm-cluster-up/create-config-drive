@@ -1,8 +1,10 @@
 #!/bin/bash
 
+set -eu
+
 progname=$(basename $0)
 THISDIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)"
-source $THISDIR/../libexec/kvm-cluster-up/common.sh
+source $THISDIR/common.sh
 
 # This will generate a openstack-style config drive image suitable for
 # use with cloud-init.  You may optionally pass in an ssh public key
@@ -93,9 +95,9 @@ sed -i \
 
 sed -e "s/@@DOMAINNAME@@/$domainname/g" \
     -e "s/@@HOSTNAME@@/$hostname/g" \
-    -e "s/@@KUP_CLOUD_USER@@/$KUP_CLOUD_USER/g" \
+    -e "s/@@KUP_CLOUD_USERNAME@@/$KUP_CLOUD_USERNAME/g" \
     -e "s/@@IID-UUID@@/iid-${uuid}/g" \
-    $THISDIR/../libexec/kvm-cluster-up/meta-data > $config_dir/meta-data
+    $THISDIR/meta-data > $config_dir/meta-data
 
 if [ "$ssh_key_data" ]; then
 	cat >> $config_dir/meta-data <<-EOF
