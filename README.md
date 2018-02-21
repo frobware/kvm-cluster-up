@@ -160,7 +160,7 @@ easier to create another profile with a prefix that has more context:
 You can export KUP_ENV which means you don't have to prefix any of the
 `kup-*<program>*` usage:
 
-	$ export KUB_ENV=centos7
+	$ export KUB_ENV=$HOME/kup-centos7
 	# Boot a machine
 	# kup-domain-install 1
 	# Do lots of work in another shell, lunch, ...
@@ -245,8 +245,8 @@ shutting down and rebooting the machines in the cluster.
 - `kup-domain-start`
 - `kup-domain-stop`
 
-Each script takes *<instance-id>...* as the only arguments. Hopefully
-these are all very obvious and orthogonal.
+Each script takes `*<instance-id>...*` as [the only] arguments.
+Hopefully these are all very obvious and orthogonal.
 
 	$ kup-domain-delete 1 2 3 4
 	$ kup-domain-delete node1 etcd
@@ -283,7 +283,7 @@ revert:
 	$ kup-domain-start 1
 	Domain centos7-vm-1 started
 
-	$ ansible-playbook -i centos7-vm1, /path/to/playbook.yaml
+	$ ansible-playbook -i centos7-vm-1, /path/to/playbook.yaml
 
 	$ kup-domain-stop 1
 	Domain centos7-vm-1 destroyed
@@ -309,10 +309,10 @@ revert:
 	Name                 Creation Time             State
 	------------------------------------------------------------
 
-And here you can see I've only created snapshots for the machine
-identified as *1*.
+Here you can see I've only created snapshots for the machine
+identified as `*1*`.
 
-## Reverting to a snapshot
+## Reverting/Selecting a snapshot by name
 
 	$ kup-domain-stop 1
 	$ SNAPSHOT=baseinstall kup-snapshot-select 1
@@ -320,10 +320,14 @@ identified as *1*.
 
 ## Replacing a snapshot
 
+If a snapshot name already exists the existing snapshot must be deleted first:
+
 	$ kup-domain-stop 1
 	$ SNAPSHOT=baseinstall kup-snapshot-select 1
+
 	$ kup-domain-start 1
 	# login, do some stuff
+
 	$ kup-domain-stop 1
 	$ SNAPSHOT=pkg-refresh kup-snapshot-delete 1
 	$ SNAPSHOT=pkg-refresh kup-snapshot-create 1
