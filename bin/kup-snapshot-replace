@@ -11,5 +11,5 @@ set -eu
 for i in "$@"; do
     name=${KUP_PREFIX:?oops}-vm-${i}
     virsh snapshot-delete $name --snapshotname ${SNAPSHOT}
-    virsh snapshot-create-as $name --name ${SNAPSHOT} --description "${SNAPSHOT}" 
+    virsh snapshot-create-as $name --name ${SNAPSHOT} --description "${SNAPSHOT}"
 done

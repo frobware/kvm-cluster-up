@@ -2,23 +2,26 @@ EXTRA_DIST =					\
 	README.md				\
 	bootstrap.sh
 
-dist_bin_SCRIPTS =				\
-	bin/delete-config-drive			\
-	bin/detach-config-drive			\
-	bin/domain-delete			\
-	bin/domain-install			\
-	bin/domain-reboot			\
-	bin/domain-start			\
-	bin/domain-stop				\
-	bin/domain-wait-for-state		\
-	bin/snapshot-create			\
-	bin/snapshot-delete			\
-	bin/snapshot-list			\
-	bin/snapshot-replace			\
-	bin/snapshot-select			\
-	bin/upload-file-to-pool
+# Should really use $(program-prefix) for all the kup- entries but
+# that means the the pkglibexec_SCRIPTS also get changed.
 
-dist_pkglibexec_SCRIPTS =				\
+dist_bin_SCRIPTS =				\
+	bin/kup-delete-config-drive		\
+	bin/kup-detach-config-drive		\
+	bin/kup-domain-delete			\
+	bin/kup-domain-install			\
+	bin/kup-domain-reboot			\
+	bin/kup-domain-start			\
+	bin/kup-domain-stop			\
+	bin/kup-domain-wait-for-state		\
+	bin/kup-snapshot-create			\
+	bin/kup-snapshot-delete			\
+	bin/kup-snapshot-list			\
+	bin/kup-snapshot-replace		\
+	bin/kup-snapshot-select			\
+	bin/kup-upload-file-to-pool
+
+pkglibexec_SCRIPTS =					\
 	libexec/kvm-cluster-up/common.sh		\
 	libexec/kvm-cluster-up/create-config-drive	\
 	libexec/kvm-cluster-up/meta-data		\

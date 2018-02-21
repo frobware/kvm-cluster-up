@@ -8,5 +8,5 @@ source $THISDIR/../libexec/kvm-cluster-up/common.sh
 
 for i in "$@"; do
     name=${KUP_PREFIX:?oops}-vm-${i}
-    virsh snapshot-create-as $name --name ${SNAPSHOT} --description "${SNAPSHOT}" 
+    virsh snapshot-create-as $name --name ${SNAPSHOT} --description "${SNAPSHOT}"
 done
