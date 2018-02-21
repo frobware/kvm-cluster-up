@@ -9,9 +9,6 @@ chpasswd:
     @@KUP_CLOUD_USERNAME@@:password
   expire: false
 
-packages:
-  - NetworkManager
-
 ssh_pwauth: True
 disable_root: false
 
