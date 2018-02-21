@@ -3,7 +3,7 @@
 : ${DRYRUN:=}
 
 for i in "$@"; do
-    $DRYRUN virsh pool-refresh --pool $KUP_POOL
+    $DRYRUN virsh pool-refresh --pool ${KUP_POOL:=default}
     $DRYRUN virsh vol-create-as --pool $KUP_POOL $(basename $i) $(stat -Lc%s $i) --format qcow2
     $DRYRUN virsh vol-upload --pool $KUP_POOL --vol $(basename $i) --file $i
 done
