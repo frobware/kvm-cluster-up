@@ -3,12 +3,7 @@ set -a
 : ${DRYRUN:=}
 
 if [[ -n $KUP_ENV ]] && [[ -f $KUP_ENV ]]; then
-    while IFS='' read -r line || [[ -n "$line" ]]; do
-	#  Cleansing, Sanity, Paranoia. Choose any three.
-	if [[ $line =~ "export KUP_" ]]; then
-	    eval "$line"
-	fi
-    done < $KUP_ENV
+    source $KUP_ENV		# man rope
 fi
 
 : ${KUP_PREFIX:?}
