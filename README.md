@@ -29,6 +29,7 @@ A profile is a just a file with per-profile properties.
 	export KUP_PREFIX=centos7
 	export KUP_NETWORK=k8s
 	export KUP_DOMAINNAME=k8s.home
+	# https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2
 	export KUP_CLOUD_IMG=CentOS-7-x86_64-GenericCloud.qcow2
 	export KUP_OS_VARIANT=rhel7.4
 	export KUP_CLOUD_USERNAME=centos
