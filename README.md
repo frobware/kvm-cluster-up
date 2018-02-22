@@ -162,11 +162,11 @@ You can export KUP_ENV which means you don't have to prefix any of the
 
 	$ export KUB_ENV=$HOME/kup-centos7
 	# Boot a machine
-	# kup-domain-install 1
+	$ kup-domain-install 1
 	# Do lots of work in another shell, lunch, ...
 
 	# Come back from lunch...
-	# kup-domain-delete 1
+	$ kup-domain-delete 1
 	# **OOPS!** This wasn't the profile I thought I was using... Dang! IRL, way too often. :/
 
 # Accessing the machines
@@ -245,7 +245,7 @@ shutting down and rebooting the machines in the cluster.
 - `kup-domain-start`
 - `kup-domain-stop`
 
-Each script takes `*<instance-id>...*` as [the only] arguments.
+Each script takes `<instance-id>...` as [the only] arguments.
 Hopefully these are all very obvious and orthogonal.
 
 	$ kup-domain-delete 1 2 3 4
@@ -310,7 +310,14 @@ revert:
 	------------------------------------------------------------
 
 Here you can see I've only created snapshots for the machine
-identified as `1`.
+identified as `1`. But really the whole point of these scripts is to
+take the same action against multiple machines:
+
+	$ SNAPSHOT=baseinstall kup-snapshot-create 1 2 3 4
+	Domain snapshot baseinstall created
+	Domain snapshot baseinstall created
+	Domain snapshot baseinstall created
+	Domain snapshot baseinstall created
 
 ## Reverting/Selecting a snapshot by name
 
