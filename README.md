@@ -27,8 +27,8 @@ A profile is a just a file with per-profile properties.
 
 	$ cat kup-centos7
 	export KUP_PREFIX=centos7
-	export KUP_NETWORK=br-enp1s0f3
-	export KUP_DOMAINNAME=k8s.frobware.com
+	export KUP_NETWORK=k8s
+	export KUP_DOMAINNAME=k8s.home
 	export KUP_CLOUD_IMG=CentOS-7-x86_64-GenericCloud.qcow2
 	export KUP_OS_VARIANT=rhel7.4
 	export KUP_CLOUD_USERNAME=centos
@@ -49,8 +49,8 @@ Taking these environment variables in turn we have:
 
 	$ cat kup-rhel74
 	export KUP_PREFIX=rhel74-dev
-	export KUP_NETWORK=br-enp1s0f3
-	export KUP_DOMAINNAME=k8s.frobware.com
+	export KUP_NETWORK=k8s
+	export KUP_DOMAINNAME=k8s.home
 	export KUP_CLOUD_IMG=rhel-server-7.4-x86_64-kvm.qcow2
 	export KUP_OS_VARIANT=rhel7.4
 	export KUP_CLOUD_USERNAME=cloud-user
@@ -59,8 +59,8 @@ Taking these environment variables in turn we have:
 
 	$ cat kup-fedora27
 	export KUP_PREFIX=fedora27-dev
-	export KUP_NETWORK=br-enp1s0f3
-	export KUP_DOMAINNAME=k8s.frobware.com
+	export KUP_NETWORK=k8s
+	export KUP_DOMAINNAME=k8s.home
 	export KUP_CLOUD_IMG=Fedora-Cloud-Base-27-1.6.x86_64.qcow2
 	export KUP_OS_VARIANT=fedora26	# no variant in libvirt (ATM) for fedora27
 	export KUP_CLOUD_USERNAME=fedora
@@ -69,8 +69,8 @@ Taking these environment variables in turn we have:
 
 	$ cat kup-debian9
 	export KUP_PREFIX=debian9
-	export KUP_NETWORK=br-enp1s0f3
-	export KUP_DOMAINNAME=k8s.frobware.com
+	export KUP_NETWORK=k8s
+	export KUP_DOMAINNAME=k8s.home
 	export KUP_CLOUD_IMG=debian-9.3.5-20180213-openstack-amd64.qcow2
 	export KUP_OS_VARIANT=linux	# no variant in libvirt (ATM)
 	export KUP_CLOUD_USERNAME=debian
@@ -147,8 +147,8 @@ easier to create another profile with a prefix that has more context:
 
 	$ cat kup-centos7-bz18020
 	export KUP_PREFIX=centos7-bz18020
-	export KUP_NETWORK=br-enp1s0f3
-	export KUP_DOMAINNAME=k8s.frobware.com
+	export KUP_NETWORK=k8s
+	export KUP_DOMAINNAME=k8s.home
 	export KUP_CLOUD_IMG=CentOS-7-x86_64-GenericCloud.qcow2
 	export KUP_OS_VARIANT=rhel7.4
 	export KUP_CLOUD_USERNAME=centos
@@ -182,18 +182,18 @@ specify `KUP_CLOUD_USERNAME` in the profile. I wrap up access in my
 		CanonicalizeHostname yes
 
 	Host centos7-vm-1 centos7-vm-2 centos7-vm-3 centos7-vm-4 centos7-vm-5 centos7-vm-6 centos7-vm-7 centos7-vm-8
-		HostName %h.k8s.frobware.com
+		HostName %h.k8s.home
 		User centos
 
 	Host rhel74-vm-1 rhel74-vm-2 rhel74-vm-3 rhel74-vm-4 rhel74-vm-5 rhel74-vm-6 rhel74-vm-7 rhel74-vm-8
-		HostName %h.k8s.frobware.com
+		HostName %h.k8s.home
 		User cloud-user
 
 	Host fedora27-vm-1 fedora27-vm-2 fedora27-vm-3 fedora27-vm-4 fedora27-vm-5 fedora27-vm-6 fedora27-vm-7 fedora27-vm-8
-		HostName %h.k8s.frobware.com
+		HostName %h.k8s.home
 		User cloud-user
 
-	Host *.k8s.frobware.com
+	Host *.k8s.home
 		GSSAPIAuthentication no
 		ControlPersist 10m
 		ControlMaster auto
@@ -206,7 +206,8 @@ specify `KUP_CLOUD_USERNAME` in the profile. I wrap up access in my
 		CheckHostIP no
 
 Note: as these machines are on my LAN and tend to have a short-life,
-the security setup is, well, super-lax!
+the security setup is, well, super-lax! I could also use wildcards but
+then tab completion wouldn't work.
 
 ## Logging into the instance
 
