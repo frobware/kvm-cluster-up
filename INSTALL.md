@@ -5,7 +5,7 @@ provision and manage the machines. You need to be a member of the
 libvirt group to use these scripts without requiring root or sudo
 access.
 
-	$ sudo dnf install autoconf virt-manager libvirt virt-install util-linux
+	$ sudo dnf install autoconf virt-manager libvirt virt-install util-linux genisoimage
 
 	$ git clone https://github.com/frobware/kvm-cluster-up.git
 	$ cd kvm-cluster-up
