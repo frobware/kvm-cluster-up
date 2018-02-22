@@ -62,6 +62,7 @@ Taking these environment variables in turn we have:
 	export KUP_PREFIX=fedora27-dev
 	export KUP_NETWORK=k8s
 	export KUP_DOMAINNAME=k8s.home
+	# https://download.fedoraproject.org/pub/fedora/linux/releases/27/CloudImages/x86_64/images/Fedora-Cloud-Base-27-1.6.x86_64.qcow2
 	export KUP_CLOUD_IMG=Fedora-Cloud-Base-27-1.6.x86_64.qcow2
 	export KUP_OS_VARIANT=fedora26	# no variant in libvirt (ATM) for fedora27
 	export KUP_CLOUD_USERNAME=fedora
