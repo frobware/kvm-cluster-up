@@ -94,9 +94,19 @@ following on the virtualisation host:
 	$ cat /etc/NetworkManager/dnsmasq.d/k8s.conf
 	server=/k8s.home/192.168.121.1
 
-	# Restart NM to make this take affect
-	systemctl restart NetworkManager
+You need to ensure that NetworkManager runs dnsmasq so that our
+intercept will work:
 
+	$ cat /etc/NetworkManager/NetworkManager.conf
+	...
+	[main]
+	dns=dnsmasq
+	...
+
+Restart NetworkManager to make this take affect:
+
+	$ systemctl restart NetworkManager
+	
 On the virtualisation host, and this host alone, we can resolve
 machine names:
 
