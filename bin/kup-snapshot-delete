@@ -1,6 +1,5 @@
 #!/bin/bash
 
-progname=$(basename $0)
 THISDIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)"
 source $THISDIR/../libexec/kvm-cluster-up/common.sh
 
