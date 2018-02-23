@@ -2,7 +2,6 @@
 
 set -eu
 
-progname=$(basename $0)
 THISDIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)"
 source $THISDIR/common.sh
 
