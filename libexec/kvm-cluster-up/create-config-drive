@@ -91,7 +91,8 @@ else
 fi
 
 sed -i \
-    -e "s/@@KUP_CLOUD_USERNAME@@/$KUP_CLOUD_USERNAME/g" $config_dir/user-data
+    -e "s/@@KUP_CLOUD_USERNAME@@/$KUP_CLOUD_USERNAME/g" \
+    $config_dir/user-data
 
 sed -e "s/@@DOMAINNAME@@/$domainname/g" \
     -e "s/@@HOSTNAME@@/$hostname/g" \
@@ -100,6 +101,9 @@ sed -e "s/@@DOMAINNAME@@/$domainname/g" \
     $THISDIR/meta-data > $config_dir/meta-data
 
 if [ "$ssh_key_data" ]; then
+	sed -i \
+	    -e "s,@@SSH_KEY_DATA@@,$ssh_key_data,g" \
+	    $config_dir/user-data
 	cat >> $config_dir/meta-data <<-EOF
 	public-keys:
 	  - |

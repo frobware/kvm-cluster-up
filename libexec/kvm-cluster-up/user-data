@@ -4,6 +4,14 @@ growpart:
   mode: auto
   devices: ['/']
 
+users:
+  - name: @@KUP_CLOUD_USERNAME@@
+    shell: /bin/bash
+    lock-passwd: false
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh-authorized-keys:
+      - @@SSH_KEY_DATA@@
+
 chpasswd:
   list: |
     @@KUP_CLOUD_USERNAME@@:password
