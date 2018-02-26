@@ -14,11 +14,6 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 # Checks for programs.
 
-AC_CHECK_PROG(PYTHON2_CHECK,python2,yes)
-if test x"$PYTHON2_CHECK" != x"yes"; then
-    AC_MSG_ERROR([Please install package python2.])
-fi
-
 AC_CHECK_PROG(VIRSH_CHECK,virsh,yes)
 if test x"$VIRSH_CHECK" != x"yes"; then
     AC_MSG_ERROR([Please install package libvirt-bin.])
@@ -26,14 +21,12 @@ fi
 
 AC_CHECK_PROG(VIRT_INSTALL_CHECK,virt-install,yes)
 if test x"$VIRT_INSTALL_CHECK" != x"yes"; then
-    AC_MSG_ERROR([Please install package virtinst.])
+    AC_MSG_ERROR([Please install virt-install.])
 fi
 
-# Checks for libraries.
-
-AC_PYTHON_MODULE(libvirt)
-if test x"$HAVE_PYMOD_libvirt" != x"yes"; then
-    AC_MSG_ERROR([Please install package python-libvirt.])
+AC_CHECK_PROG(GENISOIMAGE_INSTALL_CHECK,genisoimage,yes)
+if test x"$GENISOIMAGE_INSTALL_CHECK" != x"yes"; then
+    AC_MSG_ERROR([Please install package genisoimage.])
 fi
 
 # Checks for header files.
