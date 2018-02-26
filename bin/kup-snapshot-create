@@ -6,6 +6,6 @@ source $THISDIR/../libexec/kvm-cluster-up/common.sh
 : ${SNAPSHOT:?"you-did-not-set-SNAPSHOT"}
 
 for i in "$@"; do
-    name=${KUP_PREFIX:?oops}-vm-${i}
+    name=${KUP_PREFIX}-vm-${i}
     virsh snapshot-create-as $name --name ${SNAPSHOT} --description "${SNAPSHOT}"
 done

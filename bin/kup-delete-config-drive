@@ -6,6 +6,6 @@ source $THISDIR/../libexec/kvm-cluster-up/common.sh
 virsh pool-refresh --pool $KUP_POOL
 
 for i in "$@"; do
-    name=${KUP_PREFIX:?oops}-vm-${i}
+    name=${KUP_PREFIX}-vm-${i}
     virsh vol-delete --pool $KUP_POOL "${name}-ds.iso"
 done

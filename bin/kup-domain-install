@@ -6,7 +6,7 @@ source $THISDIR/../libexec/kvm-cluster-up/common.sh
 set -eu
 
 for i in "$@"; do
-    name=${KUP_PREFIX:?oops}-vm-${i}
+    name=${KUP_PREFIX}-vm-${i}
     config_drive=$(mktemp -d)/"${name}-ds.iso"
     $THISDIR/../libexec/kvm-cluster-up/create-config-drive \
 	--domainname=$KUP_DOMAINNAME \

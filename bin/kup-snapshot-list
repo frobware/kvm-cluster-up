@@ -4,6 +4,6 @@ THISDIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)"
 source $THISDIR/../libexec/kvm-cluster-up/common.sh
 
 for i in "$@"; do
-    name=${KUP_PREFIX:?oops}-vm-${i}
+    name=${KUP_PREFIX}-vm-${i}
     virsh snapshot-list $name
 done
