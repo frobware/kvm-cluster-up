@@ -277,7 +277,7 @@ my dev-cycle I tend to make liberal use of snapshots.
 
 ## Take a snapshot
 
-Prep the machine(s) in some way, then take a snaphost so we can eaily
+Prep the machine(s) in some way, then take a snapshot so we can eaily
 revert:
 
 	$ SNAPSHOT=baseinstall kup-snapshot-create 1
