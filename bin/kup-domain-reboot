@@ -5,5 +5,5 @@ source $THISDIR/../libexec/kvm-cluster-up/common.sh
 
 for i in "$@"; do
     name=${KUP_PREFIX}-vm-${i}
-    virsh reboot $name
+    virsh reboot $name || virsh start $name
 done
