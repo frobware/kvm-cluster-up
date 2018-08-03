@@ -78,6 +78,7 @@ host:
 			</dhcp>
 		</ip>
 	</network>
+	EOF
 
 	$ virsh net-start k8s
 	Network k8s started
