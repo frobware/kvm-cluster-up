@@ -1,0 +1,39 @@
+#!/bin/bash
+
+THISDIR="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd -P)"
+source $THISDIR/../libexec/kvm-cluster-up/common.sh
+
+defvar() {
+    IFS='\n' read -r -d '' ${1} || true
+}
+
+: ${LIBVIRT_DEFAULT_URI:=qemu:///system}
+
+defvar LIBVIRT_PREAMBLE <<-EOF
+import libvirt, sys
+conn = libvirt.open("$LIBVIRT_DEFAULT_URI")
+if conn is None:
+    print('Failed to open connection to $LIBVIRT_DEFAULT_URI')
+    exit(1)
+EOF
+
+domain_ipaddr() {
+    local domain=$1
+    python - $domain <<EOF
+$LIBVIRT_PREAMBLE
+dom = conn.lookupByName("$domain")
+if dom:
+    ifaces = dom.interfaceAddresses(libvirt.VIR_DOMAIN_INTERFACE_ADDRESSES_SRC_AGENT, 0)
+    for (name, val) in ifaces.items():
+        if val['addrs']:
+            for ipaddr in val['addrs']:
+                if ipaddr['type'] == libvirt.VIR_IP_ADDR_TYPE_IPV4 and ipaddr['addr'] != "127.0.0.1":
+                    print(ipaddr['addr'])
+exit(1)
+EOF
+}
+
+for i in "$@"; do
+    name=${KUP_PREFIX}-vm-${i}
+    echo $(domain_ipaddr $name)
+done
