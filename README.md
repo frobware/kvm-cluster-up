@@ -247,6 +247,7 @@ shutting down and rebooting the machines in the cluster.
 - `kup-domain-reboot`
 - `kup-domain-start`
 - `kup-domain-stop`
+- `kup-domain-ipaddr`
 
 Each script takes `<instance-id>...` as [the only] arguments.
 Hopefully these are all very obvious and orthogonal.
@@ -259,6 +260,7 @@ Hopefully these are all very obvious and orthogonal.
 	$ kup-domain-start 1 2 3 4
 	$ kup-domain-start master etcd node1 node2
 	$ kup-domain-stop  master etcd node1 node2
+	$ kup-domain-ipaddr master etcd node1 node2
 
 # Snapshots
 
