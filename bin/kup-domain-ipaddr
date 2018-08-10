@@ -29,6 +29,7 @@ if dom:
             for ipaddr in val['addrs']:
                 if ipaddr['type'] == libvirt.VIR_IP_ADDR_TYPE_IPV4 and ipaddr['addr'] != "127.0.0.1":
                     print(ipaddr['addr'])
+		    exit(0)
 exit(1)
 EOF
 }
