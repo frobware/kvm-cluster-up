@@ -10,6 +10,7 @@ dist_bin_SCRIPTS =				\
 	bin/kup-detach-config-drive		\
 	bin/kup-domain-delete			\
 	bin/kup-domain-install			\
+	bin/kup-domain-ipaddr			\
 	bin/kup-domain-reboot			\
 	bin/kup-domain-start			\
 	bin/kup-domain-stop			\
