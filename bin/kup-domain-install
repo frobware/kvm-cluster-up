@@ -27,6 +27,7 @@ for i in "$@"; do
 	    --noautoconsole \
 	    --memballoon virtio \
 	    --boot hd \
+	    --import \
 	    --disk vol=$KUP_POOL/${name}.qcow2,format=qcow2,bus=virtio,cache=writeback,size=${KUP_DISK_SIZE} \
 	    --disk vol=$KUP_POOL/$(basename $config_drive),bus=virtio \
 	    --network network=${KUP_NETWORK},model=virtio

@@ -1,0 +1,11 @@
+<!--
+sudo virsh net-define bridged-network.xml 
+sudo virsh net-start bridged-network
+sudo virsh net-autostart bridged-network
+-->
+
+<network>
+  <name>bridged-network</name>
+  <forward mode="bridge" />
+  <bridge name="br0" />
+</network>
