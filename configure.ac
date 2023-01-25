@@ -37,10 +37,5 @@ fi
 
 # Checks for libraries.
 
-AC_PYTHON_MODULE(libvirt)
-if test x"$HAVE_PYMOD_libvirt" != x"yes"; then
-    AC_MSG_ERROR([Please install package python-libvirt.])
-fi
-
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
