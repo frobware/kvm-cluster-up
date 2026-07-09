@@ -16,7 +16,7 @@ provision and manage the machines.
 	$ ./bootstrap.sh
 	$ ./configure [--prefix=$HOME/bin ]
 	$ make
-	$ sudo make install
+	$ [sudo] make install
 
 All the scripts have a `kup-` prefix, yielding easy tab-completion and
 identification.
